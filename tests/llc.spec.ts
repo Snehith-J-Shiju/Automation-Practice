@@ -1,4 +1,4 @@
-const {test, expect} = require('@jest/globals');
+import { test, expect } from '@playwright/test';
 
 test('Playwright rewrite with getBy', async ({page}) => {
     await page.goto("https://rahulshettyacademy.com/angularpractice/");
