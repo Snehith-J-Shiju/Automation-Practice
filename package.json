@@ -1,15 +1,34 @@
 {
-  "name": "automation-training",
+  "name": "clear",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {},
   "keywords": [],
-  "author": "",
+  "homepage": "https://github.com/Snehith-J-Shiju/Automation-Practice#readme",
+  "bugs": {
+    "url": "https://github.com/Snehith-J-Shiju/Automation-Practice/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snehith-J-Shiju/Automation-Practice.git"
+  },
   "license": "ISC",
+  "author": "",
   "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "regression" : "npx playwright test",
+    "Webtests" : "npx playwright test --grep @Web",
+    "APItests" : "npx playwright test --grep @API",
+    "SafariNewConfig" : "npx playwright test --config=playwright.config1.js --project=chromium"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  },
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
+    "@playwright/test": "^1.64.0",
     "@types/node": "^25.3.0"
   }
 }

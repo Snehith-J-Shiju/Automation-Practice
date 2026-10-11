@@ -16,12 +16,14 @@ const config =({
   testDir: './tests',
   timeout: 40000,
   expect: {
-    timeout: 40000,
+    timeout: 5000,
   },
   // reporter: 'html',
   use: {
     browserName: 'chromium',
     headless: false,
+    actionTimeout: 10 * 1000,
+    navigationTimeout: 30 * 1000,
   },
 });
 

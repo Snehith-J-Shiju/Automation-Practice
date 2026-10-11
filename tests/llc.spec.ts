@@ -1,6 +1,10 @@
 // import { test, expect } from '@playwright/test';
 
 // test('Playwright rewrite with getBy', async ({page}) => {
+//     test.setTimeout(40000); // timeout for this test
+//   page.setDefaultTimeout(9000); //timeout for all the actions in this test
+//   const slowExpect = expect.configure({timeout: 10000});
+//   await slowExpect(page).toHaveTitle(/Practice/);
 //     await page.goto("https://rahulshettyacademy.com/angularpractice/");
 //     console.log(await page.title());
 //     await page.locator("[name='name']").first().fill("Snehith Shiju");
