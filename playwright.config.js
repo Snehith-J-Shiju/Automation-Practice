@@ -18,14 +18,14 @@ const config =({
   expect: {
     timeout: 5000,
   },
-  // reporter: 'html',
+  workers: process.env.CI === 'true' ? 1 : undefined,
+  reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     browserName: 'chromium',
-    headless: false,
+    headless: process.env.CI === 'true',
     actionTimeout: 10 * 1000,
     navigationTimeout: 30 * 1000,
   },
 });
 
 module.exports = config;
-

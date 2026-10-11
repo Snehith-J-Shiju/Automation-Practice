@@ -1,5 +1,6 @@
 import excelJS from 'exceljs'; // Import the exceljs library
 import {test, expect} from '@playwright/test';
+import path from 'node:path';
 
 async function writeExcelFile(searchText, replaceText, change, filePath){
 const workbook = new excelJS.Workbook(); // Create a new workbook
@@ -26,21 +27,20 @@ async function readExcelFile(worksheet, searchText){
 return output;
     
 }
-// writeExcelFile("Apple",479, {rowChange:0, columnChange:2},"C:/Users/user/Downloads/download.xlsx"); // Call the function to read the Excel file
-
-test('Upload download excel validation', async ({ page }) => {
-    const textSearch = "Fig";
+test('Upload download excel validation', async ({ page }, testInfo) => {
+    const textSearch = "Apple";
     const textReplace = "123";
     await page.goto('https://rahulshettyacademy.com/upload-download-test/');
     const downloadButton = page.getByRole('button', { name: 'Download' });
+    const downloadPromise = page.waitForEvent('download');
     await downloadButton.click();
-    const downloadPromise = page.waitForEvent('download'); // Wait for the download event to occur
-    await page.locator('#downloadButton').click();
-    await downloadPromise;
-    await writeExcelFile(textSearch,textReplace, {rowChange:0, columnChange:2},"C:/Users/user/Downloads/download.xlsx"); // Call the function to read the Excel file
+    const download = await downloadPromise;
+    const filePath = path.join(testInfo.outputDir, 'download.xlsx');
+    await download.saveAs(filePath);
+    await writeExcelFile(textSearch,textReplace, {rowChange:0, columnChange:2}, filePath); // Call the function to read the Excel file
     const uploadButton = page.locator('#fileinput');
-    await uploadButton.setInputFiles('C:/Users/user/Downloads/download.xlsx');
+    await uploadButton.setInputFiles(filePath);
     const textLocator = page.getByText(textSearch);
     const desiredRow = await page.getByRole('row').filter({ has: textLocator });
-    await expect(desiredRow.locator("#cell-4-undefinied")).toContainText(textReplace);
+    await expect(desiredRow).toContainText(textReplace);
 });

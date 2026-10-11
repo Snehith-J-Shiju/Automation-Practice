@@ -49,7 +49,7 @@ test(`Client App login - ${data.username} with product ${data.productName}`, asy
 
 }
 
-custmomtest.only("Client App login", async ({ page, testDataforOrder }) => 
+custmomtest("Client App login", async ({ page, testDataforOrder }) =>
    {
    //js file- Login js, DashboardPage, CartPage, CheckoutPage   
    const poManager = new POManager(page);
